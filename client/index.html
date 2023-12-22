@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - ShuleSpace</title>
+    <link rel="stylesheet" href="/client/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.1/mustache.js"></script> -->
+</head>
+
+<body>
+    <header>
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">ShuleSpace</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-2">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="/client/events.html">Events</a></li>
+                            <li class="list-group-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="list-group-item"><a href="about.html">About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <!-- Banner -->
+                <div class="jumbotron" id="welcomeSection">
+                    <div id="welcomeTemplate" type="text/template">
+                        <h9 class="display-4">Welcome to ShuleSpace</h9>
+                        <p class="lead">Re-unite, and onnect with your fellow alumni</p>
+                        <hr class="my-4">
+                        <a class="btn btn-primary btn-md" href="login.html" role="button">Login</a>
+                    </div>
+                </div>
+
+                <!-- Event Cards -->
+                <div class="row">
+                    <!-- Event Card Example (You can repeat this block for multiple events) -->
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <img src="assets/images/Alumni Banner.png" class="card-img-top" alt="Event Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Alumni Connect</h5>
+                                <p class="card-text">Network and reconnect with your fellow alumni who graduated in
+                                    2015. We have invited several alumni since 2015</p>
+                                <a href="events.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar for Featured Events -->
+            <div class="col-lg-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Featured Events</h5>
+                        <ul id="eventList" class="list-group">
+                            <!-- Your events will be listed here dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <!-- About Us -->
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Welcome to the University Alumni Platform, where connections thrive and memories endure.
+                        Our platform is dedicated to fostering a strong bond among alumni, providing a space to
+                        reconnect with your fellow graduates.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light" href="/client/index.html">Home</a></li>
+                        <li><a class="text-light" href="/events">Events</a></li>
+                        <li><a class="text-light" href="/client/404.html">Blog</a></li>
+                        <li><a class="text-light" href="/client/404.html">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Site Functionalities -->
+                <div class="col-md-4">
+                    <h5>Site Functionalities</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light" href="/client/dashboard.html">Profile</a></li>
+                        <li><a class="text-light" href="/client/404.html">Settings</a></li>
+                        <li><a class="text-light" href="/client/login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Include Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        // Fetch user events and populate the event list
+        await fetchAndDisplayEvents();
+        await fetchAndDisplayUser();
+    });
+
+    let user;
+    async function fetchAndDisplayEvents() {
+        try {
+            const response = await fetch('http://localhost:3000/api/events', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('your-secret-key')}`
+                }
+            });
+
+            if (response.ok) {
+                const events = await response.json();
+                displayEvents(events);
+            } else {
+                console.error('Failed to fetch events:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Failed to fetch events:', error);
+        }
+    }
+
+    async function fetchAndDisplayUser() {
+        try {
+            const response = await fetch('http://localhost:3000/api/users/me', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('shule__token')}`
+                }
+            });
+
+            if (response.ok) {
+                user = await response.json();
+                document.getElementById('user-username').textContent = user.username;
+                return user;
+            } else {
+                console.error('Failed to fetch user:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Failed to fetch user:', error);
+        }
+    }
+
+    function displayEvents(events) {
+        const eventList = document.getElementById('eventList');
+        eventList.innerHTML = '';
+
+        events.slice(0, 6).forEach(event => {
+            const listItem = document.createElement('li');
+            listItem.dataset.id = event._id;
+            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            listItem.innerHTML = `
+            <div>
+                <span class="event-title">${event.title}</span>
+                <span class="event-date">${new Date(event.date).toLocaleDateString()}</span>
+            </div>
+        `;
+
+            eventList.appendChild(listItem);
+        });
+    }
+
+
+
+</script>
+
+</body>
+
+</html>

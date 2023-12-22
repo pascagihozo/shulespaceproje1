@@ -1,0 +1,171 @@
+/* Customize Bootstrap primary color to orange */
+/* Navbar */
+.navbar {
+    border: none; /* Remove the border */
+    background-color: #343a40; /* Dark background color */
+}
+
+.navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link {
+    color: #ffffff;
+    transition: color 0.3s; /* Add a smooth color transition */
+}
+
+.navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link:hover {
+    color: #f0f0f0;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 5px; /* Add some rounded corners to all buttons */
+}
+
+.btn-primary {
+    background-color: orange;
+    border-color: orange;
+    color: white;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Add smooth transitions */
+}
+
+.btn-primary:hover {
+    background-color: darkorange;
+    border-color: darkorange;
+}
+
+/* Cards */
+.card {
+    border: none; /* Remove the border */
+    border-radius: 10px; /* Add some rounded corners */
+    transition: transform 0.3s; /* Add a subtle transform animation */
+   
+}
+
+.card:hover {
+    transform: scale(1.03); /* Enlarge the card on hover */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow on hover */
+}
+
+/* Jumbotron */
+/* .jumbotron {
+    background-color: orange;
+    color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Add a box shadow for depth */
+*/
+
+/* Form control */
+.form-control {
+    background-color: #f0f0f0;
+    border: none; /* Remove the border */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+.form-control::placeholder {
+    color: #333;
+}
+
+/* Featured Events */
+.card-title {
+    color: orange;
+    font-weight: bold; /* Add bold font for card titles */
+    font-size: 1.25rem; /* Increase the font size */
+}
+
+.card-text {
+    color: #666;
+}
+
+/* List group */
+.list-group-item {
+    background-color: orange;
+    border: none; /* Remove the border */
+    transition: background-color 0.3s; /* Add a smooth transition */
+    
+}
+
+.list-group-item:hover {
+    background-color: darkorange;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .jumbotron {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .card {
+        margin: 10px;
+    }
+}
+
+/* Customize Bootstrap primary color to orange */
+/* Buttons */
+.btn-primary {
+    color: white; /* Set the text color to white */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Add smooth transitions */
+}
+
+.btn-primary:hover {
+    background-color: darkorange;
+    border-color: darkorange;
+    color: white; /* Set the text color to white on hover */
+}
+
+/* Modify link color on hover */
+.text-primary:hover {
+    color: #FF8000 !important;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40; /* Dark background color */
+    color: #ffffff; /* Light text color */
+    padding: 2rem 0; /* Add padding to the top and bottom */
+    box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow at the top */
+}
+
+/* Footer columns */
+footer .col-md-4 {
+    margin-bottom: 20px;
+}
+
+/* Footer headings */
+footer h5 {
+    color: #FFA500; /* Orange heading color */
+}
+
+/* Footer links */
+footer a {
+    color: #ffffff;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #FFA500; /* Orange color on hover */
+}
+
+/* Responsive Design for Footer */
+@media (max-width: 768px) {
+    footer {
+        text-align: center;
+    }
+
+    footer .col-md-4 {
+        margin-bottom: 30px;
+    }
+}
+
+#featuredEventsId {
+    background-color: yellow;
+    color: initial; /* Use 'initial' to reset the color to default (usually black) */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+    /* Hover styles */
+    cursor: pointer;
+}
+
+#featuredEventsId:hover {
+    background-color: orange;
+    /* color: white; */
+}

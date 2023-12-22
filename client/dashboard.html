@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ShuleSpace</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Include Mustache.js -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script> -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Navigation bar using Bootstrap -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">ShuleSpace</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="profile-container">
+                            <div class="profile-header">
+                                <h2>User Profile</h2>
+                                <p>Welcome, <span id="user-username"></p>
+                            </div>
+
+                            <div class="profile-actions">
+                                <a href="login.html">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Manage Existing Events</h5>
+                        <p class="card-text">View, edit, or delete events you've created.</p>
+                        <button id="manageEventsBtn" class="btn btn-primary btn-block">Manage Events</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="username">Welcome <span id="user-username"></span></h5>
+                        <p class="card-text">You are logged in to your ShuleSpace dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Your Events</h3>
+                <ul id="eventList" class="list-group">
+                    <!-- Your events will be listed here dynamically -->
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <!-- About Us -->
+                <div class="col-md-4">
+                    <h5 style="color:darkorange">About Us</h5>
+                    <p>Welcome to the University Alumni Platform, where connections thrive and memories endure.
+                        Our platform is dedicated to fostering a strong bond among alumni,
+                        providing a space to reconnect with your alma mater and fellow graduates</p>
+                </div>
+
+                 <!-- Quick Links -->
+                 <div class="col-md-4" style="color:darkorange">
+                    <h5 style="color:darkorange">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light" href="/client/index.html">Home</a></li>
+                        <li><a class="text-light" href="/events">Events</a></li>
+                        <li><a class="text-light" href="/client/404.html">Blog</a></li>
+                        <li><a class="text-light" href="/client/404.html">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Site Functionalities -->
+                <div class="col-md-4">
+                    <h5 style="color:darkorange">Site Functionalities</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light" href="/client/dashboard.html">Profile</a></li>
+                        <li><a class="text-light" href="/client/404.html">Settings</a></li>
+                        <li><a class="text-light" href="/client/login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include Bootstrap JavaScript (Popper.js and jQuery are required) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Fetch user events and populate the event list
+            // await fetchAndDisplayEvents();
+
+            // Fetch user-specific events and populate the event list
+
+            // Fetch user data and update the welcome message
+            await fetchAndDisplayUser();
+            await fetchAndDisplayUserSpecificEvents();
+
+            // Add event listener to the Create Event form
+            const createEventForm = document.getElementById('createEventForm');
+            createEventForm.addEventListener('submit', handleCreateEvent);
+
+            // Event delegation for Edit and Delete buttons
+            document.getElementById('eventList').addEventListener('click', function (event) {
+                const target = event.target;
+
+                if (target.classList.contains('edit-event')) {
+                    // Extract event ID and handle edit functionality
+                    const eventId = target.parentElement.dataset.id;
+                    handleEditEvent(eventId);
+                } else if (target.classList.contains('delete-event')) {
+                    // Extract event ID and handle delete functionality
+                    const eventId = target.parentElement.dataset.id;
+                    handleDeleteEvent(eventId);
+                }
+            });
+        });
+
+        let user;
+
+        async function fetchAndDisplayUserSpecificEvents() {
+            try {
+                // user = await fetchAndDisplayUser();
+                const response = await fetch('http://localhost:3000/api/events/myevent', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('your-secret-key')}`,
+                        'Content-Type': 'application/json', // Add this line
+                    },
+                    body: JSON.stringify({ user: user }), // Correct way to include user data
+                });
+
+
+                if (response.ok) {
+                    const events = await response.json();
+                    displayEvents(events);
+                } else {
+                    console.error('Failed to fetch user-specific events:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Failed to fetch user-specific events:', error);
+            }
+        }
+        async function fetchAndDisplayEvents() {
+            try {
+                const response = await fetch('http://localhost:3000/api/events', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('your-secret-key')}`
+                    }
+                });
+
+                if (response.ok) {
+                    const events = await response.json();
+                    displayEvents(events);
+                } else {
+                    console.error('Failed to fetch events:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Failed to fetch events:', error);
+            }
+        }
+
+        async function fetchAndDisplayUser() {
+            try {
+                const response = await fetch('http://localhost:3000/api/users/me', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('shule__token')}`
+                    }
+                });
+
+                if (response.ok) {
+                    user = await response.json();
+                    document.getElementById('user-username').textContent = user.username;
+                    return user;
+                } else {
+                    console.error('Failed to fetch user:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Failed to fetch user:', error);
+            }
+        }
+
+        function displayEvents(events) {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = '';
+
+            events.forEach(event => {
+                const listItem = document.createElement('li');
+                listItem.dataset.id = event._id;
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+                listItem.innerHTML = `
+                    <div>
+                        <span class="event-title">${event.title}</span>
+                        <span class="event-date">${new Date(event.date).toLocaleDateString()}</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary edit-event">Edit</button>
+                        <button class="btn btn-danger delete-event">Delete</button>
+                    </div>
+                `;
+
+                eventList.appendChild(listItem);
+            });
+        }
+        $(document).on('click', '#manageEventsBtn', function () {
+            // Redirect to the events-management.html page
+            window.location.href = 'http://127.0.0.1:5501/client/events.html';
+        });
+
+        async function handleEditEvent(eventId) {
+            try {
+                // Fetch the event details for editing
+                const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('your-secret-key')}`
+                    }
+                });
+
+                if (response.ok) {
+                    const eventDetails = await response.json();
+
+                    // Assuming you have a function to populate a form with event details
+                    populateEditForm(eventDetails);
+
+                    // Add logic to open a modal or navigate to an edit page
+                } else {
+                    console.error('Failed to fetch event details for editing:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error during handleEditEvent:', error);
+            }
+        }
+
+        async function handleDeleteEvent(eventId) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/events/${eventId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('your-secret-key')}`
+                    }
+                });
+
+                if (response.ok) {
+                    // Refresh the event list after deleting the event
+                    await fetchAndDisplayEvents();
+                } else {
+                    console.error('Failed to delete event:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error during handleDeleteEvent:', error);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

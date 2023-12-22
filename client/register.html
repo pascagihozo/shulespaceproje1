@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp - ShuleSpace</title>
+    <link rel="stylesheet" href="/client/css/styles.css">
+    
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"><!-- Include Mustache.js from CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.1/mustache.js"></script> -->
+    
+
+</head>
+<body>
+    <header>
+        <!-- Navigation bar using Bootstrap -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">ShuleSpace</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sign-Up Form -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Sign Up</h1>
+                        <form id="signupForm" action="/api/users/register" method="POST">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <!-- Password strength indicator can be added here -->
+                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        </form>
+                        <p id="message" class="mt-3 text-center"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <!-- About Us -->
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Welcome to the University Alumni Platform, where connections thrive and memories endure.
+        Our platform is dedicated to fostering a strong bond among alumni, providing a space to
+        reconnect with your alma mater and fellow graduates.</p>
+                </div>
+    
+                 <!-- Quick Links -->
+                 <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light" href="/client/index.html">Home</a></li>
+                        <li><a class="text-light" href="/events">Events</a></li>
+                        <li><a class="text-light" href="/client/404.html">Blog</a></li>
+                        <li><a class="text-light" href="/client/404.html">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Site Functionalities -->
+                <div class="col-md-4">
+                    <h5>Site Functionalities</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light" href="/client/dashboard.html">Profile</a></li>
+                        <li><a class="text-light" href="/client/404.html">Settings</a></li>
+                        <li><a class="text-light" href="/client/login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const username = this.username.value;
+            const email = this.email.value;
+            const password = this.password.value;
+
+            try {
+                console.log({ username, email, password })
+                const response = await fetch('http://localhost:3000/api/users/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password }),
+                });
+
+                console.log(response)
+
+                if (response.status === 201) {
+                    // document.getElementById('message').textContent = 'Sign up successful! PLease log in';
+                    window.location.href = 'http://127.0.0.1:5501/client/login.html';
+                    
+                } else if (response.status === 400) {
+                    const data = await response.json();
+                    document.getElementById('message').textContent = `Sign up failed: ${data.error}`;
+                } else {
+                    document.getElementById('message').textContent = 'Sign up failed. Please try again.';
+                }
+            } catch (error) {
+                console.error('Sign up error:', error);
+                document.getElementById('message').textContent = 'An error occurred during sign up.';
+            }
+        });
+    </script>
+
+    <!-- Include Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
